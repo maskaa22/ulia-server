@@ -7,14 +7,15 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const {usersRouter, commentsRouter, poemRouter} = require('./routes/index');
+const {PORT_3000, PORT, MONGO_CONNECT_URL} = require('./config')
 
 const app = express();
 
 app.use(cors({
-  credentials: true, origin: 'https://ulia-ushenko.vercel.app/', methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+  credentials: true, origin: PORT_3000, methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
 }));
 
-mongoose.connect('mongodb+srv://ulia:ulia123987@cluster0.maqudan.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect(MONGO_CONNECT_URL);
 
 
 
@@ -46,8 +47,8 @@ app.use('/poems', poemRouter);
 
 async function start() {
   try {
-      app.listen(5000, () => {
-          console.log('Server start', 5000);
+      app.listen(PORT, () => {
+          console.log('Server start', PORT);
       });  
   }
   catch {

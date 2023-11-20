@@ -1,12 +1,14 @@
 const nodemailer = require('nodemailer');
+const {NO_REPLY_EMAIL, NO_REPLY_EMAIL_PASSWORD} = require('.././config');
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
     port: 587,
     secure: false,
     auth: {
-        user: 'uliabulinaushenko@gmail.com',
-        pass: 'xdsikpgmaojlogqo'
+        user: NO_REPLY_EMAIL,
+        pass: NO_REPLY_EMAIL_PASSWORD
     }
 });
 
