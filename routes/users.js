@@ -3,8 +3,9 @@ const router = express.Router();
 const { UserDB, AuthDB } = require('../db/index');
 const passwordServise = require('../servises/password-servise');
 const jwtServise = require('../servises/jwt-servise');
+const { sendMailForUs } = require('../servises/email-servise');
 // const sendGrid = require('@sendgrid/mail');
- const nodemailer = require('nodemailer');
+
 
 router.get('/', async function (req, res) {
   try {
@@ -127,61 +128,13 @@ router.get('/refresh', async function (req, res) {
 router.post('/send', async function (req, res, next) {
   try {
 
-    
-//       sendGrid.setApiKey('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');
+    const {user_email, text}= req.body;
 
-//       const {user_email, text}= req.body;
-// console.log(user_email, text)
-    // const massageData = {
-    //   to: 'uliabulinaushenko@gmail.com',
-    //   from: user_email,
-    //   subject: '',
-    //   text: text,
-    //   html: '<p> Bla bla </p>'
-    // }
+    const send = await sendMailForUs(user_email, text);
 
-    // const massageData = {
-    //   to: 'sokolavanila22@gmail.com',
-    //   from: 'uliabulinaushenko@gmail.com',
-    //   subject: 'Subject',
-    //   text: 'text',
-    //   html: '<p> Bla bla </p>'
-    // }
-
-    // await sendGrid.send(massageData, function(err, info) {
-    //   if(err) {
-    //     console.log('Not send')
-    //   } else consoe.log('Send!!!!')
-    // });
-
-    // console.log(req.body);
-
-
-
-   
-
-const transporter = nodemailer.createTransport({
-    service: GMAIL,
-    auth: {
-        user: 'uliabulinaushenko@gmail.com',
-        pass: ''
-    }
-});
-
-
-const sendMailForUs = (name, email, phone, text) => transporter.sendMail({
-    from: `${email}`,
-    to: NO_REPLY_EMAIL,
-    subject: `Привіт, мене звати - ${name}`,
-    html: `<p>Мій телефон: ${phone}.</p>` +
-        `<p>${text}</p>`
-});
-
-
-
-    return res.json('sendMail');
+    res.json(send);
   } catch (e) {
-    next(e);
+    console.log(e);
   }
 });
 
