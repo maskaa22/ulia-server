@@ -11,6 +11,6 @@ module.exports = {
     NO_REPLY_EMAIL_PASSWORD: process.env.NO_REPLY_EMAIL_PASSWORD,
 
     PORT: process.env.PORT || 5000,
-    PORT_3000: 'https://ulia-ushenko.vercel.app/',
+    PORT_3000: 'https://ulia-ushenko.vercel.app',
 
 };
