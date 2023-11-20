@@ -11,7 +11,7 @@ const {usersRouter, commentsRouter, poemRouter} = require('./routes/index');
 const app = express();
 
 app.use(cors({
-  credentials: true, origin: 'http://localhost:3000', methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+  credentials: true, origin: 'https://ulia-ushenko.vercel.app/', methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
 }));
 
 mongoose.connect('mongodb+srv://ulia:ulia123987@cluster0.maqudan.mongodb.net/?retryWrites=true&w=majority');
